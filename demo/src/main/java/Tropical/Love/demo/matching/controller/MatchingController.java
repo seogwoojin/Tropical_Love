@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class MatchingController {
     @GetMapping("/match")
     public String match(){
-        return "/match/1";
+
+        return "/match/people";
+
     }
 
 }
