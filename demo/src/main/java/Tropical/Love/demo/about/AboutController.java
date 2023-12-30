@@ -12,9 +12,9 @@ public class AboutController {
     }
 
 
-    @GetMapping("/test")
+    @GetMapping("/main")
     public String test(){
-        return "test";
+        return "main";
     }
 
 

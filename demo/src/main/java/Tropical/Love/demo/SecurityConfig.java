@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -19,14 +20,16 @@ public class SecurityConfig {
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .authorizeHttpRequests((authorizeHttpRequests) -> authorizeHttpRequests
-                        .requestMatchers(new AntPathRequestMatcher("/**")).permitAll())
+                .authorizeHttpRequests(
+                        (authorizeHttpRequests) -> authorizeHttpRequests
+                            .requestMatchers(new AntPathRequestMatcher("/**")).permitAll()
+                )
                 .formLogin((formLogin) -> formLogin
-                        .loginPage("/user/login")
-                        .defaultSuccessUrl("/question/list"))
+                        .loginPage("/users/login")
+                        .defaultSuccessUrl("/main"))
                 .logout((logout) -> logout
                         .logoutRequestMatcher(new AntPathRequestMatcher("/user/logout"))
-                        .logoutSuccessUrl("/question/list")
+                        .logoutSuccessUrl("/main")
                         .invalidateHttpSession(true))
         ;
         return http.build();
